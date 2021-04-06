@@ -11,3 +11,11 @@ while True:
         if event.type == pg.QUIT:
             pg.quit()
             exit()
+
+
+    keys = pg.key.get_pressed()
+    Pacman_library.main_game.player.move(keys)
+
+
+    Pacman_library.main_game.drawing_the_figures()
+    Pacman_library.main_game.clock.tick(Pacman_library.main_game.fps)

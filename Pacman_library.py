@@ -32,19 +32,61 @@ class Enemy():
         self.direction_x, self.direction_y = 0, 0
         self.x, self.y = 0, 0
         self.colour = (0, 0, 0)
-    
+
+
+class Player():
+    def __init__(self):
+        self.speed = 1
+        self.x, self.y = 0, 0
+        
 
 class Game_process():
     def __init__(self, field, enemy, player):
         self.field = field
         self.enemy = enemy
         self.player = player
+        self.fps = 60
+        self.clock = pg.time.Clock()
 
 
     def start_the_game(self):
         self.field.creating()
 
 
+    def drawing_the_figures(self):
+        self.start_the_game()
+        pg.draw.circle(
+                    self.field.screen, (100, 100, 100),
+                    (self.player.x, self.player.y), self.field.width // 2
+                    )
+        # pg.draw.circle(
+        #             self.field.screen, (0, 0, 0),
+        #             (self.enemy.x, self.enemy.y), self.field.width // 2
+        #             )
+        pg.display.update()
+
+
+    def check_move(self):
+        cell_player_x = self.player.x // self.field.width + 1
+        cell_player_y = self.player.y // self.field.width + 1
+        self.field.matrix[cell_player_y][cell_player_x] = "p"
+        if  
+
+
+    def move_player(self, keys):
+        if keys[pg.K_w]:
+            self.y -= self.speed
+        if keys[pg.K_s]:
+            self.y += self.speed
+        if keys[pg.K_d]:
+            self.x += self.speed
+        if keys[pg.K_a]:
+            self.x -= self.speed
+
+
 main_field = Field()
-main_game = Game_process(main_field, None, None)
+player = Player()
+player.x = main_field.sizes_main_game[0] * main_field.width // 2
+player.y = main_field.sizes_main_game[1] * main_field.width // 2
+main_game = Game_process(main_field, None, player)
         
