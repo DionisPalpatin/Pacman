@@ -16,7 +16,7 @@ class Field():
         self.screen = pg.display.set_mode((self.sizes_main_game[0] * self.width, self.sizes_main_game[1] * self.width))
         for y in range(self.sizes_main_game[0]):
             for x in range(self.sizes_main_game[1]):
-                if self.matrix[y][x] != 0:
+                if self.matrix[y][x] == 1:
                     colour = (0, 0, 0)
                 else:
                     colour = (255, 255, 0)
@@ -24,7 +24,6 @@ class Field():
                             self.screen, colour,
                             (x * self.width, y * self.width, self.width, self.width)
                             )
-        pg.display.update()
     
 
 class Enemy():
@@ -39,7 +38,6 @@ class Player():
         self.speed = 3
         self.x, self.y = 0, 0
         self.rad = 0
-        self.has_moved = False
         self.cell_x, self.cell_y = 0, 0
         
 
@@ -62,7 +60,6 @@ class Game_process():
         #             self.field.screen, (0, 0, 0),
         #             (self.enemy.x, self.enemy.y), self.field.width // 2
         #             )
-        self.player.has_moved = False
         pg.display.update()
 
 
@@ -85,7 +82,6 @@ class Game_process():
                 self.player.y -= self.player.speed
             else:
                 self.player.y -= self.player.rad - distans_up
-            self.player.has_moved = True
         if keys[pg.K_s]:
             if self.field.matrix[self.player.cell_y + 1][self.player.cell_x] == 1:
                 if distans_down - self.player.rad > self.player.speed:
@@ -96,7 +92,6 @@ class Game_process():
                 self.player.y += self.player.speed
             else:
                 self.player.y += self.player.rad - distans_down
-            self.player.has_moved = True
         if keys[pg.K_a]:
             if self.field.matrix[self.player.cell_y][self.player.cell_x - 1] == 1:
                 if distans_left - self.player.rad > self.player.speed:
@@ -107,7 +102,6 @@ class Game_process():
                 self.player.x -= self.player.speed
             else:
                 self.player.x -= self.player.rad - distans_left
-            self.player.has_moved = True
         if keys[pg.K_d]:
             if self.field.matrix[self.player.cell_y][self.player.cell_x + 1] == 1:
                 if distans_right - self.player.rad > self.player.speed:
@@ -118,7 +112,6 @@ class Game_process():
                 self.player.x += self.player.speed
             else:
                 self.player.x += self.player.rad - distans_right
-            self.player.has_moved = True
                 
 
 

@@ -14,8 +14,6 @@ while True:
 
 
     keys = pg.key.get_pressed()
-    if keys:
-        Pacman_library.main_game.move_player(keys)
-        if Pacman_library.player.has_moved:
-            Pacman_library.main_game.drawing_the_figures()
+    Pacman_library.main_game.move_player(keys)
+    Pacman_library.main_game.drawing_the_figures()
     Pacman_library.main_game.clock.tick(Pacman_library.main_game.fps)
